@@ -1,0 +1,16 @@
+apply plugin: 'java-library'
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
+dependencies {
+    def domainDependencies = rootProject.ext.domainDependencies
+    def domainTestDependencies = rootProject.ext.domainTestDependencies
+
+    implementation domainDependencies.rxJava
+    implementation domainDependencies.guava
+
+    testImplementation domainTestDependencies.junit
+    testImplementation domainTestDependencies.mockito
+
+}

@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+
+    defaultConfig {
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner androidJunittestInstrumentationRunner
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+
+dependencies {
+    def dataDependencies = rootProject.ext.dataDependencies
+    def dataTestDependencies = rootProject.ext.dataTestDependencies
+
+    implementation project(':domain')
+    
+    implementation dataDependencies.appcompat
+    implementation dataDependencies.gson
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofitRx2Adapter
+    implementation dataDependencies.retrofitGsonConverter
+
+    testImplementation dataTestDependencies.junit
+    testImplementation dataTestDependencies.mockito
+
+    androidTestImplementation dataTestDependencies.androidJUnitTestRunner
+    androidTestImplementation dataTestDependencies.espressoCore
+}

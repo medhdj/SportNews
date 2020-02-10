@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+    defaultConfig {
+        applicationId "com.medhdj.samples.sportnews"
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner androidJunittestInstrumentationRunner
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def appDependencies = rootProject.ext.appDependencies
+    def appTestDependencies = rootProject.ext.appTestDependencies
+
+    implementation project(':domain')
+    implementation project(':data')
+
+
+    implementation appDependencies.appcompat
+    implementation appDependencies.constraintlayout
+    implementation appDependencies.materialdesign
+    implementation appDependencies.recyclerview
+    implementation appDependencies.cardview
+
+    implementation appDependencies.glide
+    implementation appDependencies.rxandroid
+    implementation appDependencies.threetenabp
+    implementation appDependencies.apacheCommon
+
+
+    testImplementation appTestDependencies.junit
+
+    androidTestImplementation appTestDependencies.androidJUnitTestRunner
+    androidTestImplementation appTestDependencies.espressoCore
+}
